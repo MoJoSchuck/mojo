@@ -1,0 +1,10 @@
+# build outputs
+.next
+out
+dist
+coverage
+node_modules
+# misc
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
