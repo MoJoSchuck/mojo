@@ -42,14 +42,14 @@ model User {
 
 model Post {
   id String @id @default(cuid())
-  authorid String
+  authorId String
   content String?
   image String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relations
-  author User @relation(fields: [authorid], references: [id], onDelete: Cascade) // cascade delete means if user is deleted, their posts are deleted too
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade) // cascade delete means if user is deleted, their posts are deleted too
   comments Comment[]
   likes Like[]
   notifications Notification[]
@@ -58,16 +58,16 @@ model Post {
 model Comment {
   id String @id @default(cuid())
   content String
-  authorid String
-  postid String
+  authorId String
+  postId String
   createdAt DateTime @default(now())
 
   // Relations
-  author User @relation(fields: [authorid], references: [id], onDelete: Cascade)
-  post Post @relation(fields: [postid], references: [id], onDelete: Cascade)
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   notifications Notification[]
 
-  @@index([authorid, postid]) // composite index for faster queries
+  @@index([authorId, postId]) // composite index for faster queries
 }
 
 model Like {
