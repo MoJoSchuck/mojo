@@ -12,7 +12,7 @@ export async function createPost(content: string, image: string) {
       data: {
         content,
         image,
-        authorId: userId,
+        author: { connect: { id: userId } },
       },
     });
 

@@ -11,7 +11,7 @@ import { createPost } from "@/actions/post.action";
 import toast from "react-hot-toast";
 import ImageUpload from "./ImageUpload";
 
-const CreatePost = () => {
+function CreatePost() {
   const { user } = useUser();
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -24,8 +24,20 @@ const CreatePost = () => {
     setIsPosting(true);
 
     try {
-      await createPost(content, imageUrl);
-    } catch (error) {}
+      const result = await createPost(content, imageUrl);
+      if (result.success) {
+        // reset the form
+        setContent("");
+        setImageUrl("");
+        setShowImageUpload(false);
+        toast.success("Post created successfully!");
+      }
+    } catch (error) {
+      console.error("Failed to create post:", error);
+      toast.error("Failed to create post. Please try again.");
+    } finally {
+      setIsPosting(false);
+    }
   };
 
   return (
@@ -81,6 +93,6 @@ const CreatePost = () => {
       </CardContent>
     </Card>
   );
-};
+}
 
 export default CreatePost;

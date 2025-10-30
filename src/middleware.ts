@@ -2,10 +2,11 @@ import { clerkMiddleware } from "@clerk/nextjs/server";
 
 export default clerkMiddleware();
 
+// Recommended matcher by Clerk for Next.js App Router
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    // Run middleware on all routes except for static files and public assets
+    "/((?!.+\\.[\\w]+$|_next).*)",
     // Always run for API routes
     "/(api|trpc)(.*)",
   ],
