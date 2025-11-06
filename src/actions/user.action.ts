@@ -18,15 +18,25 @@ export async function syncUser() {
 
     if (existingUser) {
       // Optionally update user info here if needed
+      const nextImage = user.imageUrl;
+
+      const updates: Record<string, string | null | undefined> = {};
+      if (nextImage && existingUser.image !== nextImage) updates.image = nextImage;
+
+      if (Object.keys(updates).length > 0) {
+        const updated = await prisma.user.update({ where: { clerkId: userId }, data: updates });
+        revalidatePath("/"); // Sidebar/Feed neu laden
+        return updated;
+      }
+
       return existingUser;
     }
 
     //create user
-
     const dbUser = await prisma.user.create({
       data: {
         clerkId: userId,
-        name: `${user.firstName || ""} ${user.lastName || ""}`,
+        name: `${user.firstName || ""} ${user.lastName || ""}.trim()`,
         username: user.username ?? user.emailAddresses[0]?.emailAddress?.split("@")[0],
         email: user.emailAddresses[0]?.emailAddress,
         image: user.imageUrl,

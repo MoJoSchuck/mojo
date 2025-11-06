@@ -16,7 +16,7 @@ async function Sidebar() {
   const user = await getUserByClerkId(authUser.id);
   if (!user) return null;
 
-  console.log({ user });
+  const avatarUrl = authUser?.imageUrl ?? user.image ?? "/avatar.png";
 
   return (
     <div className="sticky top-20">
@@ -25,7 +25,7 @@ async function Sidebar() {
           <div className="flex flex-col items-center text-center">
             <Link href={`/profile/${user.username}`} className="flex flex-col items-center justify-center">
               <Avatar className="w-20 h-20 border-2">
-                <AvatarImage src={user.image || "/avatar.png"} />
+                <AvatarImage src={avatarUrl} />
               </Avatar>
 
               <div className="mt-4 space-y-1">
