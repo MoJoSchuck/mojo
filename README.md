@@ -34,8 +34,6 @@ Create posts (with images), like, comment, follow users, and receive notificatio
 
 ## 📁 Project Structure
 
-## 📁 Project Structure
-
 ```bash
 src/
 ├── app/
