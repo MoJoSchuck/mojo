@@ -26,9 +26,16 @@ interface ProfilePageClientProps {
   posts: Posts;
   likedPosts: Posts;
   isFollowing: boolean;
+  viewerDbUserId: string | null;
 }
 
-function ProfilePageClient({ isFollowing: initialIsFollowing, likedPosts, posts, user }: ProfilePageClientProps) {
+function ProfilePageClient({
+  isFollowing: initialIsFollowing,
+  likedPosts,
+  posts,
+  user,
+  viewerDbUserId,
+}: ProfilePageClientProps) {
   const { user: currentUser } = useUser();
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
@@ -183,7 +190,7 @@ function ProfilePageClient({ isFollowing: initialIsFollowing, likedPosts, posts,
           <TabsContent value="posts" className="mt-6">
             <div className="space-y-6">
               {posts.length > 0 ? (
-                posts.map((post) => <PostCard key={post.id} post={post} dbUserId={user.id} />)
+                posts.map((post) => <PostCard key={post.id} post={post} dbUserId={viewerDbUserId} />)
               ) : (
                 <div className="text-center py-8 text-muted-foreground">No posts yet</div>
               )}
@@ -193,7 +200,7 @@ function ProfilePageClient({ isFollowing: initialIsFollowing, likedPosts, posts,
           <TabsContent value="likes" className="mt-6">
             <div className="space-y-6">
               {likedPosts.length > 0 ? (
-                likedPosts.map((post) => <PostCard key={post.id} post={post} dbUserId={user.id} />)
+                likedPosts.map((post) => <PostCard key={post.id} post={post} dbUserId={viewerDbUserId} />)
               ) : (
                 <div className="text-center py-8 text-muted-foreground">No liked posts to show</div>
               )}

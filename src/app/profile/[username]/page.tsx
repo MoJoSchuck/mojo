@@ -1,4 +1,5 @@
 import { getProfileByUsername, getUserLikedPosts, getUserPosts, isFollowing } from "@/actions/profile.action";
+import { getDbUserId } from "@/actions/user.action";
 import { notFound } from "next/navigation";
 import ProfilePageClient from "./ProfilePageClient";
 
@@ -23,6 +24,16 @@ async function ProfilePageServer({ params }: { params: { username: string } }) {
     isFollowing(user.id),
   ]);
 
-  return <ProfilePageClient user={user} posts={posts} likedPosts={likedPosts} isFollowing={isCurrentUserFollowing} />;
+  const viewerDbUserId = await getDbUserId();
+
+  return (
+    <ProfilePageClient
+      user={user}
+      posts={posts}
+      likedPosts={likedPosts}
+      isFollowing={isCurrentUserFollowing}
+      viewerDbUserId={viewerDbUserId}
+    />
+  );
 }
 export default ProfilePageServer;
