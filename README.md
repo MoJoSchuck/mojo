@@ -1,6 +1,6 @@
-#  mojo
+# mojo
 
-A modern social feed app built with **Next.js App Router**, **Clerk auth**, **Prisma + PostgreSQL**, and **shadcn/ui**.  
+A modern social media app built with **Next.js App Router**, **Clerk auth**, **Prisma + PostgreSQL**, and **shadcn/ui**.  
 Create posts (with images), like, comment, follow users, and receive notifications — with real-time updates and a responsive UI.
 
 <img width="1262" height="681" alt="Bildschirmfoto 2025-11-06 um 16 17 27" src="https://github.com/user-attachments/assets/f4906e51-32fe-4c5d-a781-719744fdd0ed" />
@@ -66,13 +66,13 @@ src/
 ## 🧱 Notable Implementation Details
 
 - **Server actions**
-  - `post.action.ts`: createPost, getPosts, toggleLike (with notification), createComment (with notification), deletePost  
-  - `user.action.ts`: syncUser (syncs Clerk user image/name/email to DB), getUserByClerkId, getDbUserId, getRandomUsers, toggleFollow (with notification)  
-  - `profile.action.ts`: getProfileByUsername, getUserPosts, getUserLikedPosts, updateProfile, isFollowing  
+  - `post.action.ts`: createPost, getPosts, toggleLike (with notification), createComment (with notification), deletePost
+  - `user.action.ts`: syncUser (syncs Clerk user image/name/email to DB), getUserByClerkId, getDbUserId, getRandomUsers, toggleFollow (with notification)
+  - `profile.action.ts`: getProfileByUsername, getUserPosts, getUserLikedPosts, updateProfile, isFollowing
   - `notification.action.ts`: getNotifications, markNotificationsAsRead
 
 - **Avatars**
-  - ✅ Uses `object-cover object-center` for proper stretching  
+  - ✅ Uses `object-cover object-center` for proper stretching
   - ✅ Prefers Clerk image URL (`user.imageUrl`) if available, else falls back to DB image
 
 - **Caching / Revalidation**
@@ -90,11 +90,13 @@ src/
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
+
 - Node.js 18+
 - PostgreSQL database (local or hosted)
 - Clerk account (Publishable + Secret Key)
 
-### 2. Environment Variables  
+### 2. Environment Variables
+
 Create a `.env` file in the project root with:
 
 ```env
@@ -117,13 +119,17 @@ npm install
 npx prisma generate
 npx prisma migrate dev
 ```
+
 ## 🧩 4. Run Dev Server
+
 ```bash
 npm run dev
 ```
+
 Then open: http://localhost:3000
 
 ## ☁️ Deployment
+
 - Use your own server or deploy on Vercel (recommended)
 - Ensure your Prisma schema is migrated on your production DB
 - Set environment variables in your hosting platform
@@ -135,6 +141,4 @@ Then open: http://localhost:3000
 
 ## 📜 License
 
-MIT 
-
-
+MIT
